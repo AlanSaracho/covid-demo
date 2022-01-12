@@ -9,7 +9,7 @@ type Props = {
   children: React.ReactElement;
   scale?: number;
   onPress?: () => void;
-  style?: ViewStyle | ViewStyle[];
+  style?: Animated.AnimatedStyleProp<ViewStyle>;
 };
 
 const ScalePressable = ({ children, scale = 1.1, onPress = noop, style }: Props) => {

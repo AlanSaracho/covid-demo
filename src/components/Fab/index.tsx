@@ -6,7 +6,7 @@ type OrderIndicatorProps = {
   size?: number;
   onPress?: () => void;
   style?: ViewStyle;
-  children: React.Element;
+  children: React.ReactElement;
 }
 
 const Fab = ({ onPress, children, style }: OrderIndicatorProps) => (

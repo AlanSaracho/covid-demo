@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "648295761169",
+    "project_id": "covid-test-ec278",
+    "storage_bucket": "covid-test-ec278.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:648295761169:android:ac4adb075945bb2da4b8b0",
+        "android_client_info": {
+          "package_name": "com.covid.loremipsum.com"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "648295761169-obfe23hgtmt7i9mh4doubai4b5pqg83b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPSEfBnDXnVZHqa71S-uj9OEN23dpuAvc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "648295761169-obfe23hgtmt7i9mh4doubai4b5pqg83b.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "648295761169-tphn9u8jqq25e51mq161onpun6oke003.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.covid.loremipsum.com"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

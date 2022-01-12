@@ -1,10 +1,10 @@
-import { atom, useRecoilState } from "recoil";
-import * as GoogleSignIn from 'expo-google-sign-in';
 import { useEffect, useState } from "react";
+import { atom, useRecoilState } from "recoil";
+import { GoogleSignin, User } from '@react-native-google-signin/google-signin';
 import { buildPersistEffect } from "./persist";
 
 export type SessionState = {
-  user: GoogleSignIn.GoogleUser | null;
+  user: User | null;
 }
 
 const defaultValue: SessionState = {
@@ -22,19 +22,18 @@ export const useSession = () => {
   const [loading, setLoading] = useState(false);
 
   const syncUser = async () => {
-    const user = await GoogleSignIn.signInSilentlyAsync();
+    const user = await GoogleSignin.signInSilently();
     setSession({ ...session, user });
   }
 
   const signIn = async () => {
     setLoading(true);
     try {
-      await GoogleSignIn.askForPlayServicesAsync();
-      const { type } = await GoogleSignIn.signInAsync();
-      if(type === 'success') {
-        await syncUser()
-      }
+      // check play services
+      const user = await GoogleSignin.signIn();
+      setSession({ ...session, user });
     }catch(e) {
+      // manage error
       console.log(e);
     }
 
@@ -43,13 +42,13 @@ export const useSession = () => {
 
   const signOut = async () => {
     setLoading(true);
-    await GoogleSignIn.signOutAsync();
+    await GoogleSignin.signOut();
     setSession({ ...session, user: null });
     setLoading(false);
   };
 
   const initSession = async () => {
-    await GoogleSignIn.initAsync();
+    await GoogleSignin.configure();
     syncUser();
   }
 

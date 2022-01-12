@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { Text } from 'react-native';
-import { useRoute } from '@react-navigation/core';
+import { RouteProp, useRoute } from '@react-navigation/core';
 import Animated, { concat } from 'react-native-reanimated';
 import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
 import { onScrollEvent, useTimingTransition, useValue } from 'react-native-redash/src/v1';
@@ -12,6 +12,7 @@ import { AnimatedFlatList, getWaveTranslation, Loading } from '../../components'
 import { Container, OrderFab, OrderFieldFab } from './Country.styled';
 import { CountryCaseItem } from './CountryCaseItem';
 import { CountryCase } from '../../types';
+import { AppParams } from 'screens';
 
 const AnimatedIonicons = Animated.createAnimatedComponent(Ionicons);
 type Order = 'asc' | 'desc';
@@ -23,7 +24,7 @@ const iconDirectionDegrees = {
 };
 
 const Country = () => {
-  const { params } = useRoute();
+  const { params } = useRoute<RouteProp<AppParams, 'Country'>>();
   const { country } = params;
 
   const [{ data, loading, error }, refetch] = useAxios<CountryCase[]>(api.getCountryCases({ slug: country.Slug }));
@@ -83,8 +84,12 @@ const Country = () => {
         </>
       }
       {fakeLoading && <Loading />}
-      {error && <Text onPress={() => refetch()}>Ups...</Text>}
-      {!error && size(countries) === 0 && <Text onPress={() => refetch()}>No reported cases</Text>}
+      {!fakeLoading && (
+        <>
+          {error && <Text onPress={() => refetch()}>Ups...</Text>}
+          {!error && size(countries) === 0 && <Text onPress={() => refetch()}>No reported cases</Text>}
+        </>
+      )}
     </Container>
   );
 }

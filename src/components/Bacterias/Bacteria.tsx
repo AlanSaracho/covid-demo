@@ -5,10 +5,12 @@ import { random } from 'lodash';
 import { Vector } from 'react-native-redash';
 import { AnimatedBacteria } from '..';
 
+type bacteriasType = 'b1' | 'b2' | 'b3' | 'b4' | 'b5' | 'b6'
+
 type BacteriaProps = {
   duration: number;
   size: number;
-  type: 'b1' | 'b2' | 'b3' | 'b4' | 'b5' | 'b6';
+  type: bacteriasType;
   origin: Vector<number>;
   movement: Vector<number>;
   opacity: number;
@@ -18,7 +20,7 @@ type BacteriaProps = {
 const createBacteria = (): BacteriaProps => ({
   duration: random(2500, 30000),
   size: random(8, 40),
-  type: `b${random(1, 5)}`,
+  type: `b${random(1, 5)}` as bacteriasType,
   rotateZ: random(0, 360),
   opacity: random(0.3, 0.9, true),
   origin: {

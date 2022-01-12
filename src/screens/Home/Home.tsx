@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useEffect, useMemo } from 'react';
 import Animated, { useValue } from 'react-native-reanimated';
 import { Text } from 'react-native';
 import { api, useAxios} from '../../api';
@@ -10,11 +10,28 @@ import { AnimatedFlatList, getWaveTranslation, Loading } from '../../components'
 import { useDelayedLoading } from '../../utils';
 import { onScrollEvent } from 'react-native-redash/src/v1';
 import { Country } from '../../types';
+import { useSession } from 'store/session';
+import { Ionicons } from '@expo/vector-icons';
 
 const itemHeight = 64;
 
-const Home = () => {
-  const navigation = useNavigation<StackNavigationProps>();
+const Home = ({ navigation }) => {
+  // const navigation = useNavigation<StackNavigationProps>();
+  const { signOut } = useSession();
+
+  // useEffect(() => {
+  //   navigation.setOptions({
+  //     headerRight: (
+  //       <Ionicons
+  //         size={24}
+  //         name="arrow-up"
+  //         onPress={signOut}
+  //       />
+  //     )
+  //   })
+  // }, []);
+
+
   const [{ data, loading, error }, refetch] = useAxios<Country[]>(api.getCountries);
   const countries = useMemo(() => orderBy(data, 'Country'), [data]);
   const fakeLoading = useDelayedLoading(loading);

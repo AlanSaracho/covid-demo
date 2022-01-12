@@ -5,12 +5,12 @@ import { interpolate, runOnJS, useAnimatedStyle, useSharedValue, withDelay, with
 import { AnimatedBacteria } from '..';
 
 const Flash = ({ delay }: { delay: number }) => {
-  const [icon, setIcon] = useState(1);
+  const [icon, setIcon] = useState(random(1, 5));
   const [size, setSize] = useState(22);
 
   const time = useSharedValue(0);
-  const left = useSharedValue(0);
-  const right = useSharedValue(0);
+  const left = useSharedValue(random(0, 64));
+  const right = useSharedValue(random(0, 64));
 
   const update = () => {
     left.value = random(0, 64);
@@ -20,7 +20,14 @@ const Flash = ({ delay }: { delay: number }) => {
   }
 
   useEffect(() => {
-    time.value = withRepeat(withDelay(delay, withTiming(2, { duration: 1000 }, () => runOnJS(update)())), -1, false)
+    time.value = withRepeat(
+      withDelay(
+        delay,
+        withTiming(2, { duration: 1000 }, () => runOnJS(update)())
+      ),
+      -1,
+      false
+    )
   }, []);
 
   const style = useAnimatedStyle(() => ({
