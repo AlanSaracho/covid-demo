@@ -1,15 +1,11 @@
-- Install expo cli
+- Install expo cli and dependencies
 ```
 npm install -g expo-cli
-```
-
-- Install dependencies
-```
 yarn
 ```
 
 - Install apps
 ```
-expo build:ios
-expo build:android
+expo ios
+expo android
 ```
